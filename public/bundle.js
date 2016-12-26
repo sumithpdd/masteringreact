@@ -20456,68 +20456,96 @@ module.exports = require('./lib/React');
 },{"./lib/React":155}],178:[function(require,module,exports){
 var React = require('react');
 var ReactDOM = require('react-dom');
-class Header extends React.Component {
+var MainHeader = require('./main_header');
+var Page = require('./page');
+
+class App extends React.Component {
     render() {
         return React.createElement(
-            'h1',
-            { style: { color: 'red' } },
-            ' ',
+            'div',
+            { className: 'app' },
+            React.createElement(MainHeader, null),
+            React.createElement(
+                Page,
+                null,
+                React.createElement(
+                    'h1',
+                    null,
+                    'Page title'
+                )
+            )
+        );
+    }
+}
+module.exports = App;
+
+},{"./main_header":179,"./page":181,"react":177,"react-dom":26}],179:[function(require,module,exports){
+var React = require('react');
+var ReactDOM = require('react-dom');
+var MainNav = require('./main_nav');
+class MainHeader extends React.Component {
+    render() {
+        return React.createElement(
+            'div',
+            { className: 'main-header' },
+            React.createElement(
+                'div',
+                { className: 'logo' },
+                'StoreKeeper'
+            ),
+            React.createElement(MainNav, null)
+        );
+    }
+}
+module.exports = MainHeader;
+
+},{"./main_nav":180,"react":177,"react-dom":26}],180:[function(require,module,exports){
+var React = require('react');
+var ReactDOM = require('react-dom');
+class MainNav extends React.Component {
+    render() {
+        return React.createElement(
+            'nav',
+            { className: 'main-nav' },
+            React.createElement(
+                'a',
+                null,
+                'Dashboard'
+            ),
+            React.createElement(
+                'a',
+                { className: 'active' },
+                'Orders'
+            ),
+            React.createElement(
+                'a',
+                null,
+                'Catalog'
+            )
+        );
+    }
+}
+module.exports = MainNav;
+
+},{"react":177,"react-dom":26}],181:[function(require,module,exports){
+var React = require('react');
+var ReactDOM = require('react-dom');
+class Page extends React.Component {
+    render() {
+        return React.createElement(
+            'div',
+            { className: 'page' },
             this.props.children
         );
     }
 }
+module.exports = Page;
 
-class greater extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { name: 'Sumith' };
-    }
-    render() {
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(
-                Header,
-                null,
-                'Hello ',
-                this.state.name
-            ),
-            React.createElement('input', { type: 'text', ref: 'name' }),
-            React.createElement(
-                'button',
-                { onClick: this.handleGreet.bind(this) },
-                'Greet'
-            )
-        );
-    }
-    handleGreet() {
-        this.setState({ name: this.refs.name.value });
-    }
-    componentWillMount() {
-        console.log("Component will Mount");
-    }
-    componentDidMount() {
-        console.log("Component did Mount");
-    }
-    componentWillReceiveProps(nextProb) {
-        console.log("ComponentwillRecieveProp", nextProb);
-    }
-    shouldComponentUpdate(nextProb, nextstate) {
-        console.log("ShouldComponentUpdate", nextProb, nextstate);
-        return true;
-    }
-    componentWillUpdate(nextProb, nextstate) {
-        console.log("ComponentWillUpdate", nextProb, nextstate);
-        return true;
-    }
-}
+},{"react":177,"react-dom":26}],182:[function(require,module,exports){
+var React = require('react');
+var ReactDOM = require('react-dom');
 
-const greaterFactory = React.createFactory(greater);
-class Home extends React.Component {
-    render() {
-        return greaterFactory({ name: "Sammy", surname: "Boy" });
-    }
-}
-ReactDOM.render(React.createElement(Home, null), document.getElementById("app"));
+var App = require('./components/app');
+ReactDOM.render(React.createElement(App, null), document.querySelector('#app'));
 
-},{"react":177,"react-dom":26}]},{},[178]);
+},{"./components/app":178,"react":177,"react-dom":26}]},{},[182]);
