@@ -2,13 +2,14 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var MainHeader = require('./main_header')
 var Page = require('./page')
+var Orders = require('./Orders')
 
 class App extends React.Component {
     render() {
         return <div className='app'>
             <MainHeader />
             <Page>
-            <h1>Page title</h1>
+                <Orders />
             </Page>
         </div>
     }
