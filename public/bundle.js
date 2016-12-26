@@ -20454,24 +20454,39 @@ module.exports = traverseAllChildren;
 module.exports = require('./lib/React');
 
 },{"./lib/React":155}],178:[function(require,module,exports){
-//import React, { Component } from 'react';
 var React = require('react');
 var ReactDOM = require('react-dom');
+
+class Header extends React.Component {
+  render() {
+    return React.createElement(
+      'h1',
+      { style: { color: 'red' } },
+      this.props.children
+    );
+  }
+}
 class Greeter extends React.Component {
   render() {
-    return React.DOM.h1(null, "Hello" + this.props.name);
+    return React.createElement(
+      'header',
+      null,
+      'Hello ',
+      this.props.name
+    );
+
+    //return <h1>Hello {this.props.name}</h1>;
+    //return  React.DOM.h1(null,this.props.name + "the Great "+this.props.surname)}
   }
 }
 
+const greeterFactory = React.createFactory(Greeter);
 class App extends React.Component {
   render() {
-    return React.createElement(Greeter, { name: "Sumith" });
-    //  return React.DOM.h1(null, "Hello World from React.DOM");
-    //  return React.createElement('h1', null, "Hello World from CreateElement")
-    // return <h1>Hello World!</h1>;
+    return React.createElement(Greeter, { name: 'Sumith D' });
+    //     return  greeterFactory({name:"Sumith", surname: "D"})}
   }
 }
-
-ReactDOM.render(React.createElement(App, null), document.querySelector('#app'));
+ReactDOM.render(React.createElement(App, null), document.querySelector("#app"));
 
 },{"react":177,"react-dom":26}]},{},[178]);
