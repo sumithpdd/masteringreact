@@ -1,23 +1,52 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
+    var ReactDOM = require('react-dom');
+    class Header extends React.Component {
+        render() {
+        return  <h1 style={{color:'red'}}> {this.props.children}</h1 > ;
+        }
+    }
 
-class Header extends React.Component {
-    render() {
-      return <h1 style={{color: 'red'}}>{this.props.children}</h1>
-  }}
-class Greeter extends React.Component {
-    render() {
-      return <header>Hello {this.props.name}</header>;
-        
-      //return <h1>Hello {this.props.name}</h1>;
-        //return  React.DOM.h1(null,this.props.name + "the Great "+this.props.surname)}
-}}
+    class greater extends React.Component{
+      constructor(props){
+        super(props);
+        this.state= {name:'Sumith'};
 
-const greeterFactory = React.createFactory(Greeter);
-class App extends React.Component {
+      }
+        render() {
+          return <div>
+                    <Header>Hello {this.state.name}</Header>
+                    <input type='text' ref='name' />
+                    <button onClick={this.handleGreet.bind(this)}>Greet</button>
+                  </div>
+                
+          }
+          handleGreet()
+          {
+            this.setState({name: this.refs.name.value});
+          }
+    componentWillMount() {
+        console.log("Component will Mount");
+    }
+    componentDidMount() {
+        console.log("Component did Mount");
+    }
+    componentWillReceiveProps(nextProb) {
+        console.log("ComponentwillRecieveProp", nextProb)
+
+    }
+    shouldComponentUpdate(nextProb , nextstate) {
+        console.log("ShouldComponentUpdate",nextProb, nextstate)
+        return true;
+    }
+    componentWillUpdate(nextProb , nextstate) {
+        console.log("ComponentWillUpdate",nextProb, nextstate)
+        return true;
+    }
+}
+
+const greaterFactory = React.createFactory(greater);
+class Home extends React.Component {
     render() {
-      return <Greeter name="Sumith D" />;
-   //     return  greeterFactory({name:"Sumith", surname: "D"})}
-} }
-ReactDOM.render(<App />, document.querySelector("#app"));
- 
+        return  greaterFactory({name:"Sammy", surname: "Boy" })}
+}
+ReactDOM.render(<Home />, document.getElementById("app"));

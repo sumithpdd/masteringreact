@@ -20456,37 +20456,68 @@ module.exports = require('./lib/React');
 },{"./lib/React":155}],178:[function(require,module,exports){
 var React = require('react');
 var ReactDOM = require('react-dom');
-
 class Header extends React.Component {
-  render() {
-    return React.createElement(
-      'h1',
-      { style: { color: 'red' } },
-      this.props.children
-    );
-  }
-}
-class Greeter extends React.Component {
-  render() {
-    return React.createElement(
-      'header',
-      null,
-      'Hello ',
-      this.props.name
-    );
-
-    //return <h1>Hello {this.props.name}</h1>;
-    //return  React.DOM.h1(null,this.props.name + "the Great "+this.props.surname)}
-  }
+    render() {
+        return React.createElement(
+            'h1',
+            { style: { color: 'red' } },
+            ' ',
+            this.props.children
+        );
+    }
 }
 
-const greeterFactory = React.createFactory(Greeter);
-class App extends React.Component {
-  render() {
-    return React.createElement(Greeter, { name: 'Sumith D' });
-    //     return  greeterFactory({name:"Sumith", surname: "D"})}
-  }
+class greater extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { name: 'Sumith' };
+    }
+    render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                Header,
+                null,
+                'Hello ',
+                this.state.name
+            ),
+            React.createElement('input', { type: 'text', ref: 'name' }),
+            React.createElement(
+                'button',
+                { onClick: this.handleGreet.bind(this) },
+                'Greet'
+            )
+        );
+    }
+    handleGreet() {
+        this.setState({ name: this.refs.name.value });
+    }
+    componentWillMount() {
+        console.log("Component will Mount");
+    }
+    componentDidMount() {
+        console.log("Component did Mount");
+    }
+    componentWillReceiveProps(nextProb) {
+        console.log("ComponentwillRecieveProp", nextProb);
+    }
+    shouldComponentUpdate(nextProb, nextstate) {
+        console.log("ShouldComponentUpdate", nextProb, nextstate);
+        return true;
+    }
+    componentWillUpdate(nextProb, nextstate) {
+        console.log("ComponentWillUpdate", nextProb, nextstate);
+        return true;
+    }
 }
-ReactDOM.render(React.createElement(App, null), document.querySelector("#app"));
+
+const greaterFactory = React.createFactory(greater);
+class Home extends React.Component {
+    render() {
+        return greaterFactory({ name: "Sammy", surname: "Boy" });
+    }
+}
+ReactDOM.render(React.createElement(Home, null), document.getElementById("app"));
 
 },{"react":177,"react-dom":26}]},{},[178]);
