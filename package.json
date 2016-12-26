@@ -1,0 +1,29 @@
+{
+  "name": "mastering-react",
+  "version": "1.0.0",
+  "description": "Mastering React video course",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "build": "browserify -t [ babelify --presets [ react ] ] src/main.js --outfile public/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumithpdd/masteringreact.git"
+  },
+  "author": "sumith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sumithpdd/masteringreact/issues"
+  },
+  "homepage": "https://github.com/sumithpdd/masteringreact#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babelify": "^7.3.0"
+  },
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  }
+}
