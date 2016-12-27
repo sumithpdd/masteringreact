@@ -1,5 +1,7 @@
 var React = require('react');
-var  toMoney, toDateTime, toTitleCase = require('../../lib/formatters');
+var  toMoney = require('../../lib/formatters');
+var  toDateTime = require('../../lib/formatters');
+var toTitleCase = require('../../lib/formatters');
 
 class OrderRow extends React.Component {
   render() {
@@ -8,19 +10,14 @@ class OrderRow extends React.Component {
 
     return (
       <tr className='order'>
-        <td>{order.get('reference')}</td>
-        <td>{order.get('customer')}</td>
-        <td className='sorted-by'>{toDateTime(order.get('orderedAt'))}</td>
-        <td>{products}</td>
-        <td className='amount'>{toMoney(order.get('amount'))}</td>
-        <td className='status'>{toTitleCase(order.get('paymentStatus'))}</td>
-        <td className='status'>{toTitleCase(order.get('orderStatus'))}</td>
+        <td>{order.reference}</td>
+        <td>{order.customer}</td>
+         <td>{products}</td>
+        <td className='amount'>{order.amount}</td>
+        <td className='status'>{order.paymentStatus}</td>
+        <td className='status'>{order.orderStatus}</td>
       </tr>
     );
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.order !== this.props.order;
   }
 }
 module.exports = OrderRow;
